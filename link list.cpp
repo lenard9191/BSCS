@@ -12,7 +12,7 @@ struct link
 
 int main()
 {
-    int count = 3;
+    int count = 20;
     link* head = new link;
     link * scan = head;
 
@@ -34,15 +34,13 @@ int main()
         scan = scan->next;
 
     }
-    link* temp = head;
-    temp = head;
+
     for (int x = 1; x <= 10;  x++) {
-        cout << temp << ";" <<temp->value<<  " \n" ;
-        temp = temp->next;
+        cout << head << ";" <<head->value<<  " \n" ;
+        head = head->next;
 
     }
 
-    int i = 0;
     scan->next = NULL;
     scan = head;
     while ( scan){
