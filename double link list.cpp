@@ -95,7 +95,7 @@ public:
         head = nullptr;
         tail = nullptr;
         curr = nullptr;
-        cnt = NULL;
+        cnt = 0;
     }
 
     // Set current to first element
@@ -242,9 +242,8 @@ public:
         moveToStart();
         cout << "Display in Linear\n"<<endl;
 
-        for (int i = 0; i < length(); i++) {
+        for (int i = 0; i < length(); i++, next()) {
             cout <<  curr->theElement<< " ";
-            next();
 
         }
         cout << "\n";
@@ -253,9 +252,8 @@ public:
     {
         moveToEnd();
         cout <<  "\n"<<"Display in Reverse\n"<< endl;
-        for ( int i = 0; i < length(); i ++) {
+        for ( int i = 0; i < length(); i ++, prev()) {
                 cout << curr->theElement << " " ;
-                prev();
         }
         cout << "\n"<<endl;
     }
