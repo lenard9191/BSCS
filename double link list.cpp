@@ -72,8 +72,19 @@ public:
     // The class destructor
     ~DList()
     {
-        this->clear();
-        cout<< "\nDone x2" << endl;
+        moveToStart();
+        // 1, 2 , 3 ,4
+        while (curr->nextPtr != nullptr) {
+
+                DLink<E> *temp = curr;
+                next();
+                delete temp;
+                if(curr == tail){
+                    delete curr;
+                    break;
+                }
+
+        }
     }
 
     // Empty the list
@@ -130,8 +141,8 @@ public:
         cnt++;
         assert(temp != NULL);
         temp->theElement = it;
-        temp->nextPtr = nullptr;
-        temp->prevPtr = nullptr;
+        temp->nextPtr = curr->nextPtr;
+        temp->prevPtr = curr;
 
         if(head == nullptr) {
                 head = temp;
@@ -143,7 +154,7 @@ public:
         }
 
         // {1} 2 3 4
-        if ( curr = head) {
+        if ( curr == head) {
 
             temp->nextPtr = curr;
             temp->prevPtr = nullptr;
@@ -153,15 +164,20 @@ public:
             return;
         }
         // 1 2 3 {4}
+        else if ( curr == tail) {
+            temp->nextPtr = nullptr;
+            temp->prevPtr = tail;
+            curr->nextPtr = temp;
+            tail = temp;
+            return;
+        }
+        // 1 2 3 {4}
         if (curr->nextPtr != nullptr) {
             curr->nextPtr->prevPtr = temp;
 
         }
-        temp->nextPtr = curr->nextPtr;
-        temp->prevPtr = curr;
         curr->nextPtr = temp;
 
-        curr = temp;
         if(temp->nextPtr == nullptr) tail = temp;;
     }
 
@@ -250,8 +266,6 @@ public:
         moveToStart();
         for(int i = 0; i < pos; i++) {
                 next();
-
-
         }
     }
     void printNormal() {
@@ -310,6 +324,7 @@ int main(void)
     // replace the contents of the list
     theList.clear();
     cout<< "Creating new list"<< endl;
+
     for (i = 0; i < 10; ++i)
     {
         theList.append(i + 100);
@@ -322,7 +337,7 @@ int main(void)
 
     // remove two elements at the specified position
     theList.moveToPos(5);
-    cout << "Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n\n";
+    cout << "MOVING TO POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n\n";
 
     cout << "Removing: " << theList.getValue();
     theList.remove();
@@ -330,10 +345,28 @@ int main(void)
     theList.remove();
     cout << "\n"<< endl;
 
+
     // display the contents of the list
     theList.printNormal();
     // display the contents of the list in reverse order
     theList.printReverse();
+
+
+    theList.moveToPos(3);
+    cout << "MOVING TO POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n\n";
+
+    cout << "ADDING: 1001 " ;
+    theList.insert(1001);
+    cout << "\nADDING: 1002" ;
+    theList.insert(1002);
+    cout << "\n"<< endl;
+
+
+    // display the contents of the list
+    theList.printNormal();
+    // display the contents of the list in reverse order
+    theList.printReverse();
+
     cout << "Done" ;
     return 0;
 
