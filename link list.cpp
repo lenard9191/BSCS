@@ -1,8 +1,7 @@
 #include <iostream>
-#include <stdlib.h>
 #include <assert.h>
 
-using namespace std;
+using std::cout;
 
 struct link
 {
@@ -35,8 +34,8 @@ int main()
 
     }
 
-    for (int x = 1; x <= 10;  x++) {
-        cout << head << ";" <<head->value<<  " \n" ;
+    for (int x = 1; x <= 100;  x++) {
+        cout << "\t" << head->value  ;
         head = head->next;
 
     }
@@ -48,20 +47,9 @@ int main()
         scan = scan->next;
         delete temp1;
 
-        i++;
-
     }
 
-    /*scan = head;
-    for (int x = 0; x < count; x++) {
-        node * nextNode = scan->next;
-        delete scan;
-        scan = nextNode;
-    }
-
-    */
-
-    cout << "\ndone " << i << " Times" << endl;
+    cout << "\ndone ";
 
 	return 0;
 }
