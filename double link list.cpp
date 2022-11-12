@@ -303,9 +303,10 @@ int main(void)
 
     // populate the list
 
+
     for (i = 0; i < 10; ++i)
     {
-        theList.append(i);
+       theList.append(i);
     }
     while (i < 20)
     {
@@ -324,7 +325,6 @@ int main(void)
     // replace the contents of the list
     theList.clear();
     cout<< "Creating new list"<< endl;
-
     for (i = 0; i < 10; ++i)
     {
         theList.append(i + 100);
@@ -337,7 +337,7 @@ int main(void)
 
     // remove two elements at the specified position
     theList.moveToPos(5);
-    cout << "MOVING TO POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n\n";
+    cout << "Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n\n";
 
     cout << "Removing: " << theList.getValue();
     theList.remove();
@@ -345,28 +345,39 @@ int main(void)
     theList.remove();
     cout << "\n"<< endl;
 
+    theList.printNormal();
+    theList.printReverse();
 
+
+    theList.moveToStart();
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "Removing: " << theList.getValue();
+    theList.remove();
+    cout<< "\n" << endl;
+    theList.moveToEnd();
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "Removing: " << theList.getValue();
+    theList.remove();
+    cout<< "\n" << endl;
     // display the contents of the list
     theList.printNormal();
     // display the contents of the list in reverse order
     theList.printReverse();
 
+    theList.moveToPos(2);
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "ADDING: 1000 ";
+    theList.insert(1000);
+    cout<< "\n" << endl;
 
-    theList.moveToPos(3);
-    cout << "MOVING TO POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n\n";
-
-    cout << "ADDING: 1001 " ;
+    theList.moveToPos(2);
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "ADDING: 1001 ";
     theList.insert(1001);
-    cout << "\nADDING: 1002" ;
-    theList.insert(1002);
-    cout << "\n"<< endl;
+    cout<< "\n" << endl;
 
-
-    // display the contents of the list
     theList.printNormal();
-    // display the contents of the list in reverse order
     theList.printReverse();
-
     cout << "Done" ;
     return 0;
 
