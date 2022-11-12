@@ -300,11 +300,39 @@ int main(void)
     theList.remove();
     cout << "\n"<< endl;
 
+    theList.printNormal();
+    theList.printReverse();
+
+
+    theList.moveToStart();
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "Removing: " << theList.getValue();
+    theList.remove();
+    cout<< "\n" << endl;
+    theList.moveToEnd();
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "Removing: " << theList.getValue();
+    theList.remove();
+    cout<< "\n" << endl;
     // display the contents of the list
     theList.printNormal();
     // display the contents of the list in reverse order
     theList.printReverse();
 
+    theList.moveToPos(2);
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "ADDING: 1000 ";
+    theList.insert(1000);
+    cout<< "\n" << endl;
+
+    theList.moveToPos(2);
+    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "ADDING: 1001 ";
+    theList.insert(1001);
+    cout<< "\n" << endl;
+
+    theList.printNormal();
+    theList.printReverse();
     cout << "Done" ;
     return 0;
 
