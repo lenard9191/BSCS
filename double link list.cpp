@@ -132,13 +132,26 @@ public:
         temp->theElement = it;
         temp->nextPtr = nullptr;
         temp->prevPtr = nullptr;
+
         if(head == nullptr) {
                 head = temp;
+                head->prevPtr = nullptr;
                 tail = temp;
+                tail->nextPtr = nullptr;
                 curr = temp;
                 return;
         }
 
+        // {1} 2 3 4
+        if ( curr = head) {
+
+            temp->nextPtr = curr;
+            temp->prevPtr = nullptr;
+            curr->prevPtr = temp;
+            curr = temp;
+            head = curr;
+            return;
+        }
         // 1 2 3 {4}
         if (curr->nextPtr != nullptr) {
             curr->nextPtr->prevPtr = temp;
@@ -165,14 +178,16 @@ public:
 
         if (head == nullptr) {
                 head = temp;
+                head->prevPtr = nullptr;
                 tail = temp;
+                tail->nextPtr = nullptr;
                 curr = temp;
+                return;
         }
 
 
         tail->nextPtr = temp;
         tail = temp;
-        curr = temp;
 
     }
 
@@ -233,7 +248,8 @@ public:
     void moveToPos(int pos)
     {
         moveToStart();
-        for(int i = 0; i < pos; i++, next()) {
+        for(int i = 0; i < pos; i++) {
+                next();
 
 
         }
@@ -242,8 +258,10 @@ public:
         moveToStart();
         cout << "Display in Linear\n"<<endl;
 
-        for (int i = 0; i < length(); i++, next()) {
+        for (int i = 0; i < length(); i++) {
+
             cout <<  curr->theElement<< " ";
+            next();
 
         }
         cout << "\n";
@@ -252,8 +270,9 @@ public:
     {
         moveToEnd();
         cout <<  "\n"<<"Display in Reverse\n"<< endl;
-        for ( int i = 0; i < length(); i ++, prev()) {
+        for ( int i = 0; i < length(); i ++) {
                 cout << curr->theElement << " " ;
+                prev();
         }
         cout << "\n"<<endl;
     }
@@ -280,6 +299,7 @@ int main(void)
 
         ++i;
     }
+
     // display the contents of the list
     theList.printNormal();
 
