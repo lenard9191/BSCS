@@ -76,10 +76,10 @@ public:
     // The class destructor
     ~DList()
     {
-        moveToStart();
-        while (curr->nextPtr != nullptr) {
+        curr = head;
+        while (curr) {
             DLink<E> *temp = curr;
-            next();
+            curr = curr->nextPtr;
             delete temp;
         }
     }
@@ -88,10 +88,10 @@ public:
     void clear()
     {
         // 0 1 2 3 4 5 6 7 8 9 0
-        moveToStart();
-        while (curr->nextPtr != nullptr) {
+        curr = head;
+        while (curr) {
             DLink<E> *temp = curr;
-            next();
+            curr = curr->nextPtr;
             delete temp;
         }
         head = new DLink<E>();
