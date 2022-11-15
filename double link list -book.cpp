@@ -53,7 +53,7 @@ public:
     // The default constructor
     DList()
     {
-        head = new DLink<E>();
+        head = new DLink<E>;
         tail = new DLink<E>;
         curr = head;
         head->nextPtr = tail;
@@ -114,7 +114,7 @@ public:
     // Set current element to end of list
     void moveToEnd()
     {
-        curr = tail->prevPtr;
+        curr = tail;
     }
 
     // Advance current to the next element
@@ -127,6 +127,9 @@ public:
     // Return the current element
     E & getValue() const
     {
+        assert(curr != NULL);
+        if (curr == tail) return tail->theElement;
+        else if (curr == head) return head->theElement;
         return curr->theElement;
     }
 
@@ -181,6 +184,10 @@ public:
 
 
         }
+        if(curr == tail) {
+            cout<< " CANT REMOVE TAIL";
+            return NULL;
+        }
         // 1 {2} 3 4
         DLink<E> *temp = curr;
         E it = temp->theElement;
@@ -207,7 +214,7 @@ public:
     int currPos() const
     {
         int i;
-        DLink<E> *temp = head->nextPtr;
+        DLink<E> *temp = head;
 
         for (i = 0 ; curr != temp; i++) {
                 temp = temp->nextPtr;
@@ -219,12 +226,12 @@ public:
     void moveToPos(int pos)
     {
         assert(pos >= 0 && pos<=length());
-        moveToStart();
+        curr = head;
         for(int i = 0; i < pos; i++) {
-            next();
+            curr = curr->nextPtr;
         }
     }
-    void printNormal() {
+    /*void printNormal() {
         moveToStart();
         cout << "Display in Linear\n"<<endl;
 
@@ -245,6 +252,7 @@ public:
         }
         cout << "\n"<<endl;
     }
+    */
 };
 
 /*
@@ -271,38 +279,80 @@ int main(void)
     }
 
     // display the contents of the list
-    theList.printNormal();
-
+    theList.moveToStart();
+    cout << "Display Normal\n";
+    for (int i = 0; i < theList.length(); i++) {
+        cout <<  theList.getValue()<< " ";
+        theList.next();
+    }
+    cout << "\n" << endl;
 
     // display the contents of the list in reverse order
-    theList.printReverse();
+    theList.moveToEnd();
+    cout << "Display Reverse\n";
+    for (int i = 0; i < theList.length(); i++) {
+        theList.prev();
+        cout <<  theList.getValue()<< " ";
+
+    }
+    cout << "\n"<< endl;
 
     // replace the contents of the list
     theList.clear();
-    cout<< "Creating new list"<< endl;
+    cout<< "\nCreating new list"<< endl;
     for (i = 0; i < 10; ++i)
     {
         theList.append(i + 100);
     }
 
     // display the contents of the list
-    theList.printNormal();
+    theList.moveToStart();
+    cout << "Display Normal\n";
+    for (int i = 0; i < theList.length(); i++) {
+        cout <<  theList.getValue()<< " ";
+        theList.next();
+    }
+    cout << "\n" << endl;
 
-    theList.printReverse();
+    // display the contents of the list in reverse order
+    theList.moveToEnd();
+    cout << "Display Reverse\n";
+    for (int i = 0; i < theList.length(); i++) {
+        theList.prev();
+        cout <<  theList.getValue()<< " ";
+
+    }
+    cout << "\n"<< endl;
 
     // remove two elements at the specified position
     theList.moveToPos(5);
-    cout << "Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n\n";
+    cout << "Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
 
     cout << "Removing: " << theList.getValue();
     theList.remove();
-    cout << "\nRemoving: " << theList.getValue();
+    cout << "\n\nCurrent POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
+    cout << "Removing: " << theList.getValue();
     theList.remove();
     cout << "\n"<< endl;
 
-    theList.printNormal();
-    theList.printReverse();
+    // display the contents of the list
+    theList.moveToStart();
+    cout << "Display Normal\n";
+    for (int i = 0; i < theList.length(); i++) {
+        cout <<  theList.getValue()<< " ";
+        theList.next();
+    }
+    cout << "\n" << endl;
 
+    // display the contents of the list in reverse order
+    theList.moveToEnd();
+    cout << "Display Reverse\n";
+    for (int i = 0; i < theList.length(); i++) {
+        theList.prev();
+        cout <<  theList.getValue()<< " ";
+
+    }
+    cout << "\n"<< endl;
 
     theList.moveToStart();
     cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
@@ -314,10 +364,25 @@ int main(void)
     cout << "Removing: " << theList.getValue();
     theList.remove();
     cout<< "\n" << endl;
+
     // display the contents of the list
-    theList.printNormal();
+    theList.moveToStart();
+    cout << "Display Normal\n";
+    for (int i = 0; i < theList.length(); i++) {
+        cout <<  theList.getValue()<< " ";
+        theList.next();
+    }
+    cout << "\n" << endl;
+
     // display the contents of the list in reverse order
-    theList.printReverse();
+    theList.moveToEnd();
+    cout << "Display Reverse\n";
+    for (int i = 0; i < theList.length(); i++) {
+        theList.prev();
+        cout <<  theList.getValue()<< " ";
+
+    }
+    cout << "\n"<< endl;
 
     theList.moveToPos(2);
     cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
@@ -331,8 +396,25 @@ int main(void)
     theList.insert(1001);
     cout<< "\n" << endl;
 
-    theList.printNormal();
-    theList.printReverse();
+    // display the contents of the list
+    theList.moveToStart();
+    cout << "Display Normal\n";
+    for (int i = 0; i < theList.length(); i++) {
+        cout <<  theList.getValue()<< " ";
+        theList.next();
+    }
+    cout << "\n" << endl;
+
+    // display the contents of the list in reverse order
+    theList.moveToEnd();
+    cout << "Display Reverse\n";
+    for (int i = 0; i < theList.length(); i++) {
+        theList.prev();
+        cout <<  theList.getValue()<< " ";
+
+    }
+    cout << "\n"<< endl;
+
     cout << "Done" ;
     return 0;
 
