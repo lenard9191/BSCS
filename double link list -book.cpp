@@ -142,11 +142,17 @@ public:
         temp->nextPtr = curr->nextPtr;
         temp->prevPtr = curr;
 
+        if (curr == tail) {
+                cout << "cant insert at tail" ;
+                return;
+
+        }
         cnt ++;
 
 
         curr->nextPtr->prevPtr = temp;
         curr->nextPtr = temp;
+
 
 
     }
@@ -384,13 +390,13 @@ int main(void)
     }
     cout << "\n"<< endl;
 
-    theList.moveToPos(2);
+    theList.moveToPos(0);
     cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
     cout << "ADDING: 1000 ";
     theList.insert(1000);
     cout<< "\n" << endl;
 
-    theList.moveToPos(2);
+    theList.moveToEnd();
     cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
     cout << "ADDING: 1001 ";
     theList.insert(1001);
