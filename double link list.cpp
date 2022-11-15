@@ -134,7 +134,24 @@ public:
         return curr->theElement;
     }
 
-    // Insert value at current position
+    // Insert new head;
+    void inserthead(const E & it){
+
+        // 1 2 3 4
+        DLink<E> *temp = new DLink<E>;
+        cnt++;
+        assert(temp != NULL);
+        temp->theElement = it;
+        temp->nextPtr = head;
+        temp->prevPtr = nullptr;
+
+        head->prevPtr = temp;
+        head = temp;
+        curr = head;
+        return;
+
+
+    }
     void insert(const E &it)
     {
         DLink<E> *temp = new DLink<E>;
@@ -154,16 +171,6 @@ public:
         }
 
         // {1} 2 3 4
-        if ( curr == head) {
-
-            temp->nextPtr = curr;
-            temp->prevPtr = nullptr;
-            curr->prevPtr = temp;
-            curr = temp;
-            head = curr;
-            return;
-        }
-        // 1 2 3 {4}
         else if ( curr == tail) {
             temp->nextPtr = nullptr;
             temp->prevPtr = tail;
@@ -364,17 +371,22 @@ int main(void)
     // display the contents of the list in reverse order
     theList.printReverse();
 
-    theList.moveToPos(2);
+    theList.moveToStart();
     cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
     cout << "ADDING: 1000 ";
     theList.insert(1000);
     cout<< "\n" << endl;
 
-    theList.moveToPos(2);
+    theList.moveToEnd();
     cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
     cout << "ADDING: 1001 ";
     theList.insert(1001);
     cout<< "\n" << endl;
+
+    cout << "ADDING NEW HEAD: 143 \n";
+    theList.inserthead(143);
+
+    theList.printNormal();
 
     theList.printNormal();
     theList.printReverse();
