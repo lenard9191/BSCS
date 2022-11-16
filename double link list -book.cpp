@@ -129,7 +129,7 @@ public:
     {
         assert(curr != NULL);
         if (curr == tail) return tail->theElement;
-        else if (curr == head) return head->theElement;
+        if (curr == head) return head->theElement;
         return curr->theElement;
     }
 
@@ -177,36 +177,21 @@ public:
     // Remove and return the current element
     E remove()
     {
-        if (curr->nextPtr == tail) {
-            DLink<E> *temp = curr;
-            E it = temp->theElement;
 
-            temp->prevPtr->nextPtr = tail;
-            tail->prevPtr = temp->prevPtr;
-            curr = tail->prevPtr;
-            delete temp;
-            cnt--;
-            return it;
-
-
-        }
-        if(curr == tail) {
-            cout<< " CANT REMOVE TAIL";
+        // 0 1 {2} 3 4 0
+        if (curr->nextPtr == tail || curr == tail) {
+            cout<< "\nNOTHING TO REMOVE // TAIL";
             return NULL;
         }
-        // 1 {2} 3 4
-        DLink<E> *temp = curr;
+        DLink<E> *temp = curr->nextPtr;
         E it = temp->theElement;
-
-
-        temp->prevPtr->nextPtr = temp->nextPtr;
-        temp->nextPtr->prevPtr = temp->prevPtr;
-
-
-        curr = temp->nextPtr;
-
+        curr->nextPtr->nextPtr->prevPtr = curr;
+        curr->nextPtr = curr->nextPtr->nextPtr;
+        cout<< "\nREMOVING: " << it ;
+        delete temp;
         cnt--;
         return it;
+
     }
 
     // Advance current to the previous element
@@ -231,15 +216,15 @@ public:
     // Set current to the element at the given position
     void moveToPos(int pos)
     {
-        assert(pos >= 0 && pos<=length());
+        assert(("OUT OF RANGE",pos >= 0 && pos<=length()));
         curr = head;
         for(int i = 0; i < pos; i++) {
             curr = curr->nextPtr;
         }
     }
-    /*void printNormal() {
+    void printNormal() {
         moveToStart();
-        cout << "Display in Linear\n"<<endl;
+        cout << "Display Norma\n"<<endl;
 
         for (int i = 0; i < length(); i++) {
             cout <<  curr->theElement<< " ";
@@ -251,14 +236,14 @@ public:
     void printReverse()
     {
         moveToEnd();
-        cout <<  "\n"<<"Display in Reverse\n"<< endl;
+        cout <<  "\n"<<"Display Reverse\n"<< endl;
         for ( int i = 0; i < length(); i ++) {
                 cout << curr->theElement << " " ;
                 prev();
         }
         cout << "\n"<<endl;
     }
-    */
+
 };
 
 /*
@@ -332,12 +317,9 @@ int main(void)
 
     // remove two elements at the specified position
     theList.moveToPos(5);
-    cout << "Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
-
-    cout << "Removing: " << theList.getValue();
+    cout << "Current POS: \t" << theList.currPos();
     theList.remove();
-    cout << "\n\nCurrent POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
-    cout << "Removing: " << theList.getValue();
+    cout << "\n\nCurrent POS: \t" << theList.currPos();
     theList.remove();
     cout << "\n"<< endl;
 
@@ -361,13 +343,11 @@ int main(void)
     cout << "\n"<< endl;
 
     theList.moveToStart();
-    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
-    cout << "Removing: " << theList.getValue();
+    cout << "MOVING TO Current POS: \t" << theList.currPos();
     theList.remove();
     cout<< "\n" << endl;
     theList.moveToEnd();
-    cout << "MOVING TO Current POS: \t" << theList.currPos() << "\nVALUE: \t" << theList.getValue()<< "\n";
-    cout << "Removing: " << theList.getValue();
+    cout << "MOVING TO Current POS: \t" << theList.currPos() ;
     theList.remove();
     cout<< "\n" << endl;
 
