@@ -53,6 +53,19 @@ public:
     // The default constructor
     DList()
     {
+        cnt = 0;
+        head = new DLink<E>;
+        tail = new DLink<E>;
+        curr = head;
+        head->nextPtr = tail;
+        tail->prevPtr = head;
+        tail->nextPtr = nullptr;
+        head->prevPtr = nullptr;
+    }
+
+    // The copy constructor
+    DList(const DList &source)
+    {
         head = new DLink<E>;
         tail = new DLink<E>;
         curr = head;
@@ -61,16 +74,12 @@ public:
         tail->nextPtr = nullptr;
         head->prevPtr = nullptr;
         cnt = 0;
-    }
 
-    // The copy constructor
-    DList(const DList &source)
-    {
-        if (source == NULL) return ;
-        curr = source->curr;
-        head = source->head;
-        tail = source->tail;
-        cnt = source->cnt;
+        DLink<E> *temp;
+        for (temp = source.head; temp->nextPtr != source.tail; temp = temp->nextPtr) {
+                append(temp->nextPtr->theElement);
+            if (temp == source.curr) curr = tail->prevPtr;
+        }
     }
 
     // The class destructor
@@ -87,40 +96,29 @@ public:
     // Empty the list
     void clear()
     {
-        // 0 1 2 3 4 5 6 7 8 9 0
-        curr = head;
-        while (curr) {
-            DLink<E> *temp = curr;
-            curr = curr->nextPtr;
-            delete temp;
+        // 0 1 2 3 4 0
+        moveToStart();
+        while (curr->nextPtr != tail) {
+            remove();
         }
-        head = new DLink<E>();
-        tail = new DLink<E>;
-        curr = head;
-        head->nextPtr = tail;
-        tail->prevPtr = head;
-        tail->nextPtr = nullptr;
-        head->prevPtr = nullptr;
-        cnt = 0;
-
     }
 
     // Set current to first element
     void moveToStart()
     {
-        curr = head->nextPtr;
+        curr = head;
     }
 
     // Set current element to end of list
     void moveToEnd()
     {
-        curr = tail;
+        curr = tail->prevPtr;
     }
 
     // Advance current to the next element
     void next()
     {
-        if(curr == tail) return;
+        if (curr == tail) return;
         curr = curr->nextPtr;
     }
 
@@ -128,9 +126,14 @@ public:
     E & getValue() const
     {
         assert(curr != NULL);
-        if (curr == tail) return tail->theElement;
-        if (curr == head) return head->theElement;
-        return curr->theElement;
+        if(curr == tail) {
+            cout<< "no value after tail \t";
+        }
+        if (curr->nextPtr == tail){
+            cout<< " tail has no value \t";
+        }
+        return curr->nextPtr->theElement;
+
     }
 
     // Insert value at current position
@@ -179,16 +182,26 @@ public:
     {
 
         // 0 1 {2} 3 4 0
-        if (curr->nextPtr == tail || curr == tail) {
-            cout<< "\nNOTHING TO REMOVE // TAIL";
+        if (curr->nextPtr == tail) {
+                cout<< "\nCANT REMOVE TAIL";
+            return NULL;
+
+
+        }
+        if(curr == tail) {
+            cout<< " NOTHING TO REMOVE";
             return NULL;
         }
+        // 1 {2} 3 4
         DLink<E> *temp = curr->nextPtr;
         E it = temp->theElement;
-        curr->nextPtr->nextPtr->prevPtr = curr;
-        curr->nextPtr = curr->nextPtr->nextPtr;
-        cout<< "\nREMOVING: " << it ;
+
+
+        temp->nextPtr->prevPtr = curr;
+        curr->nextPtr = temp->nextPtr;
+        cout<< "\nREMOVING " << it << endl;
         delete temp;
+
         cnt--;
         return it;
 
@@ -197,7 +210,7 @@ public:
     // Advance current to the previous element
     void prev()
     {
-        if (curr ==head) return;
+        if (curr == head) return;
         curr = curr->prevPtr;
     }
 
@@ -222,28 +235,6 @@ public:
             curr = curr->nextPtr;
         }
     }
-    void printNormal() {
-        moveToStart();
-        cout << "Display Norma\n"<<endl;
-
-        for (int i = 0; i < length(); i++) {
-            cout <<  curr->theElement<< " ";
-            next();
-
-        }
-        cout << "\n";
-    }
-    void printReverse()
-    {
-        moveToEnd();
-        cout <<  "\n"<<"Display Reverse\n"<< endl;
-        for ( int i = 0; i < length(); i ++) {
-                cout << curr->theElement << " " ;
-                prev();
-        }
-        cout << "\n"<<endl;
-    }
-
 };
 
 /*
@@ -290,7 +281,7 @@ int main(void)
 
     // replace the contents of the list
     theList.clear();
-    cout<< "\nCreating new list"<< endl;
+    cout<< "\nCreating new list\n"<< endl;
     for (i = 0; i < 10; ++i)
     {
         theList.append(i + 100);
@@ -342,7 +333,7 @@ int main(void)
     }
     cout << "\n"<< endl;
 
-    theList.moveToStart();
+    theList.moveToPos(0);
     cout << "MOVING TO Current POS: \t" << theList.currPos();
     theList.remove();
     cout<< "\n" << endl;
@@ -350,6 +341,8 @@ int main(void)
     cout << "MOVING TO Current POS: \t" << theList.currPos() ;
     theList.remove();
     cout<< "\n" << endl;
+
+
 
     // display the contents of the list
     theList.moveToStart();
@@ -401,7 +394,20 @@ int main(void)
     }
     cout << "\n"<< endl;
 
-    cout << "Done" ;
+    DList<int> theList2 = theList;
+
+
+    cout << "THIS IS THE LIST 2: copy constructor check"  << endl;
+    theList2.moveToEnd();
+    cout << "Display Reverse\n";
+    for (int i = 0; i < theList2.length(); i++) {
+        theList2.prev();
+        cout <<  theList2.getValue()<< " ";
+
+    }
+
+    cout << "\nDone" ;
+
     return 0;
 
 }
