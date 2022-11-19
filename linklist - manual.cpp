@@ -28,7 +28,7 @@ int main (void) {
     third->value = 3;
     third->next =  first;
 
-    for ( int k = 0 ; k < 30; k ++ ) {
+    for ( int k = 0 ; k < 40; k ++ ) {
         cout << first->value << " " ;
         first = first->next;
 
