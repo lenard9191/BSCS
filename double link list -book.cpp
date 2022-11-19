@@ -56,6 +56,7 @@ public:
         cnt = 0;
         head = new DLink<E>;
         tail = new DLink<E>;
+        assert((head && tail) != NULL);
         curr = head;
         head->nextPtr = tail;
         tail->prevPtr = head;
@@ -68,6 +69,8 @@ public:
     {
         head = new DLink<E>;
         tail = new DLink<E>;
+
+        assert ((head && tail) != NULL);
         curr = head;
         head->nextPtr = tail;
         tail->prevPtr = head;
@@ -91,6 +94,7 @@ public:
             curr = curr->nextPtr;
             delete temp;
         }
+        cnt = 0;
     }
 
     // Empty the list
@@ -140,7 +144,8 @@ public:
     void insert(const E &it)
     {
         DLink<E> *temp = new DLink<E>;
-        assert(temp != nullptr);
+        assert(temp != NULL);
+
         temp->theElement = it;
         temp->nextPtr = curr->nextPtr;
         temp->prevPtr = curr;
@@ -152,12 +157,8 @@ public:
         }
         cnt ++;
 
-
         curr->nextPtr->prevPtr = temp;
         curr->nextPtr = temp;
-
-
-
     }
 
     // Append value at the end of the list
@@ -165,22 +166,20 @@ public:
     {
         DLink<E> *temp = new DLink<E>;
         assert(temp != nullptr);
+
         temp->theElement = it;
         temp->nextPtr = tail;
         temp->prevPtr = tail->prevPtr;
 
         cnt ++;
 
-
         tail->prevPtr->nextPtr = temp;
         tail->prevPtr = temp;
-
     }
 
     // Remove and return the current element
     E remove()
     {
-
         // 0 1 {2} 3 4 0
         if (curr->nextPtr == tail) {
                 cout<< "\nCANT REMOVE TAIL";
@@ -281,6 +280,7 @@ int main(void)
 
     // replace the contents of the list
     theList.clear();
+
     cout<< "\nCreating new list\n"<< endl;
     for (i = 0; i < 10; ++i)
     {
