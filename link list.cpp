@@ -43,9 +43,9 @@ int main()
     scan->next = NULL;
     scan = head;
     while ( scan){
-        link *temp1 = scan;
+        head = scan;
         scan = scan->next;
-        delete temp1;
+        delete head;
 
     }
 
