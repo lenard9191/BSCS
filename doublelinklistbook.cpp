@@ -129,13 +129,7 @@ public:
     // Return the current element
     E & getValue() const
     {
-        assert(curr != NULL);
-        if(curr == tail) {
-            cout<< "no value after tail \t";
-        }
-        if (curr->nextPtr == tail){
-            cout<< " tail has no value \t";
-        }
+        assert(curr->nextPtr != NULL);
         return curr->nextPtr->theElement;
 
     }
@@ -394,7 +388,9 @@ int main(void)
     }
     cout << "\n"<< endl;
 
+    theList.moveToPos(2);
     DList<int> theList2 = theList;
+
 
 
     cout << "THIS IS THE LIST 2: copy constructor check"  << endl;
@@ -405,6 +401,11 @@ int main(void)
         cout <<  theList2.getValue()<< " ";
 
     }
+    cout << endl;
+    theList2.moveToPos(2);
+    theList.moveToPos(2);
+    cout << theList.getValue() << " THE LIST 1 : " << endl;
+    cout << theList2.getValue() << " THE LIST 2 : " << endl;
 
     cout << "\nDone" ;
 
