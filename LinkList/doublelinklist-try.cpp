@@ -1,17 +1,11 @@
-/*
-CCC121 Laboratory Exercise No. 1
-Due: November 20, 2022 (Sunday) at 11:55PM
-*/
+
 
 #include <iostream>
 #include <assert.h>
 
 using namespace std;
 
-/*
-The structure to be used for representing a doubly-linked link. This struct
-declaration should not be modified in any way.
-*/
+
 template <class E>
 struct DLink
 {
@@ -20,15 +14,7 @@ struct DLink
     DLink<E> *prevPtr;
 };
 
-/*
-Complete this implementation variant of the doubly-linked list. Use the same
-convention as described in the slides. The DLink declaration to be used here is
-just a struct and should not be modified in any way. All of the operations of
-the original DLink class must be done in the methods of this class. Use
-assertions to ensure the correct operation of this ADT. All memory allocations
-should be checked with assertions and all discarded memory must be properly
-deallocated.
-*/
+
 template <class E>
 class DList
 {
