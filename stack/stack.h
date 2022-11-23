@@ -7,7 +7,7 @@ using namespace std;
 template <typename E> class Stack {
     private:
         void operator= ( const Stack&) { }
-        Stack(const Stack& {}
+        Stack(const Stack& ) { }
     public:
         Stack () {
 
