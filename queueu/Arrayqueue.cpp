@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 #include "Queue.h"
+#define defaultSize = 10;
 
 using namespace std;
 
@@ -30,20 +31,20 @@ template <typename E> class AQueue : public Queue {
             } 
         void enqueue(const E& it) 
         { 
-            Assert(((rear+2) % maxSize) != front, "Queue is full");
+            assert(((rear+2) % maxSize) != front);
             rear = (rear+1) % maxSize; // Circular increment
             listArray[rear] = it;
         }
         E dequeue() 
         { // Take element out
-            Assert(length() != 0, "Queue is empty");
+            assert(length() != 0);
             E it = listArray[front];
             front = (front+1) % maxSize; // Circular increment
             return it;
         }
         const E& frontValue() const 
         { // Get front value
-            Assert(length() != 0, "Queue is empty");
+            assert(length() != 0);
             return listArray[front];
         }
         virtual int length() const // Return length
