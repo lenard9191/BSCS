@@ -1,20 +1,20 @@
 #include <iostream>
 #include <assert.h>
 #include "Queue.h"
-#define defaultSize = 10;
+#define defaultSize  10
 
 using namespace std;
 
-template <typename E> class AQueue : public Queue {
+template <typename E> class AQueue : public Queue<E> {
     private:
         int maxSize; // Maximum size of queue
         int front; // Index of front element
         int rear; // Index of rear element
         E *listArray; // Array holding queue element
     public:
-        AQueue(int size =defaultSize) 
+        AQueue() 
         { 
-            maxSize = size+1;
+            maxSize = defaultSize+1;
             rear = 0; front = 1;
             listArray = new E[maxSize];
         }
@@ -25,7 +25,7 @@ template <typename E> class AQueue : public Queue {
         void clear() 
         { 
             delete [] listArray;
-            maxSize = size+1;
+            maxSize = defaultSize+1;
             rear = 0; front = 1;
             listArray = new E[maxSize];
             } 
@@ -54,7 +54,26 @@ template <typename E> class AQueue : public Queue {
 };
 
 int main (){
+    AQueue<int> temp;
 
+    for (int i = 1; i <= 5; i++){
+        temp.enqueue(i);
+        cout<< "Queueing: " << i << endl;
+    }
+
+
+
+    cout << "two numbers has been dequed" << endl;
+    temp.dequeue();
+    temp.dequeue();
+
+    cout << "Queue lengh is: " <<temp.length () << endl;
+    cout << "the new front value is: " << temp.frontValue() << endl;
+
+    cout << "clearing the queue" << endl;
+    temp.clear();
+
+    
     return 0;
 
 };
