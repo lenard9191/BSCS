@@ -46,12 +46,14 @@ public:
     // Empty the list
     void clear()
     {
-        while ( front->next != NULL){
-            rear = front;
+        while (rear->next != nullptr)  {
+            Link<E> *tempNext = rear->next;
             delete rear;
+            size--;
+            rear = tempNext;
         }
-        rear = front;
-        size = 0;
+        delete front;
+        cout << "DONE CLEARING!!" << endl;
     }
 
 
@@ -106,8 +108,8 @@ int main() {
 
 
     cout << "two numbers has been dequed" << endl;
-    temp.dequeue();
-    temp.dequeue();
+    cout << "dequeing " << temp.dequeue() << endl;
+    cout << "dequeing " << temp.dequeue() << endl;
 
     cout << "Queue lengh is: " <<temp.length () << endl;
     cout << "the new front value is: " << temp.frontValue() << endl;
@@ -115,6 +117,7 @@ int main() {
     cout << "clearing the queue" << endl;
     temp.clear();
 
+    cout << "Queue length is: " << temp.length() << endl;
     
     return 0;
 
