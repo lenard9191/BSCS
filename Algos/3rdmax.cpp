@@ -82,8 +82,8 @@ void firstAlgo(int arr[], int size, int count = 1) {
 }
 
 void secondAlgo(int arr[], int size) {
+    int firstmax, secondmax, thirdmax;
 
-    
 }
 //Third algo where we use sorting before finding the third max
 
