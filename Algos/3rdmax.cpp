@@ -25,7 +25,8 @@ void insertionSort(int array[], int size) {
 
 
 /* First Algo where we find the max of the first array and create a second array 
-where the previous max is deleted and then third array where the previous max again is deleted */
+where the previous max is deleted and then third array where 
+the previous max again is deleted using recursion */
 
 void firstAlgo(int arr[], int size, int count = 1) {
     int max = arr[0];
@@ -81,8 +82,65 @@ void firstAlgo(int arr[], int size, int count = 1) {
 
 }
 
+/* Second algo where the first three elements are the first , second, and third max
+and then loop through the remaining items in the array and replace the lowest of the first three */
+
+
 void secondAlgo(int arr[], int size) {
     int firstmax, secondmax, thirdmax;
+
+    cout << "Second Algorithm" << endl;
+
+    firstmax = arr[0];
+    secondmax = arr[1];
+    thirdmax = arr[2];
+
+    cout << "~Printing Array~ " << endl; 
+
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+
+    }
+    cout << endl;
+    for ( int i = 3 ; i < size ; i++) {
+        if (firstmax > secondmax && firstmax > thirdmax) {
+            if (secondmax < thirdmax) {
+                thirdmax = thirdmax + secondmax;
+                secondmax = thirdmax - secondmax;
+                thirdmax = thirdmax - secondmax;
+        }
+        }
+        else if ( secondmax > firstmax && secondmax > thirdmax) {
+            secondmax = secondmax + firstmax;
+            firstmax = secondmax - firstmax;
+            secondmax = secondmax - firstmax;
+            if (secondmax < thirdmax) {
+                thirdmax = thirdmax + secondmax;
+                secondmax = thirdmax - secondmax;
+                thirdmax = thirdmax - secondmax;
+            }
+        }
+        else{
+            thirdmax = thirdmax + firstmax;
+            firstmax = thirdmax - firstmax;
+            thirdmax = thirdmax - firstmax;
+            if (secondmax < thirdmax) {
+                thirdmax = thirdmax + secondmax;
+                secondmax = thirdmax - secondmax;
+                thirdmax = thirdmax - secondmax;
+            }
+        }
+
+
+        if (arr[i] > thirdmax) {
+            thirdmax = arr[i];
+        }
+
+
+
+    }
+
+    cout << "Third Max is : " << thirdmax << endl;
 
 }
 //Third algo where we use sorting before finding the third max
@@ -107,11 +165,19 @@ void thirdAlgo(int arr[], int size) {
 
 int main() {
 
-    int arr[] = { 6, 4, 5, 1, 9, 3, 8, 2};
-    int arr2[] = { 6, 4, 5, 1, 9, 3, 8, 2};
-    int arr3[] = { 6, 4, 5, 1, 9, 3, 8, 2};
+    int size = 10;
+    int arr[size];
+    int arr2[size];
+    int arr3[size];
+    for ( int i = 0; i < size ; i++) {
+        arr[i] = rand()%100;
+        arr2[i] = arr[i];
+        arr3[i] = arr[i];
+        
 
-    int size = sizeof(arr) / sizeof(arr[0]);
+    }
+
+
 
     cout << "First Algorithm - Using array before creating another array without the previous max" << endl;
 
