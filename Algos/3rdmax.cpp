@@ -99,6 +99,8 @@ void secondAlgo(int arr[], int size) {
 
     }
     cout << endl;
+
+/*
     for ( int i = 3 ; i < size ; i++) {
         if (firstmax > secondmax && firstmax > thirdmax) {
             if (secondmax < thirdmax) {
@@ -138,6 +140,49 @@ void secondAlgo(int arr[], int size) {
     }
 
     cout << "Third Max is : " << thirdmax << endl;
+
+*/
+    for ( int i = 3 ; i < size ; i++) {
+        
+        if ( arr[i] > firstmax) {
+            if ( secondmax < firstmax && secondmax < thirdmax)  {
+                secondmax = arr[i];
+            }
+            else if ( thirdmax < firstmax && thirdmax < secondmax){
+                thirdmax = arr[i];
+            }
+            else {
+                firstmax = arr[i];
+            }
+        }
+        else if ( arr[i] > secondmax) {
+            if ( firstmax < secondmax && firstmax < thirdmax)  {
+                firstmax = arr[i];
+            }
+            else if ( thirdmax < firstmax && thirdmax < secondmax){
+                thirdmax = arr[i];
+            }
+            else {
+                secondmax = arr[i];
+            }
+        }
+        else if ( arr[i] > thirdmax){
+            if ( firstmax < secondmax && firstmax < thirdmax)  {
+                firstmax = arr[i];
+            }
+            else if ( secondmax < firstmax && secondmax < thirdmax){
+                secondmax = arr[i];
+            }
+            else {
+                thirdmax = arr[i];
+            }
+        }
+        cout << " Operation: " << i <<endl;
+        cout << "FirstMAX: " << firstmax << " SecondMax: " << secondmax << " ThirdMax: " << thirdmax << endl;
+        
+    }
+    int lowest = (firstmax < secondmax && firstmax < thirdmax) ? firstmax : ( (secondmax < firstmax && secondmax < thirdmax ) ? secondmax: thirdmax) ;
+    cout << "Third Max is : " << lowest << endl;
 
 }
 //Third algo where we use sorting before finding the third max
