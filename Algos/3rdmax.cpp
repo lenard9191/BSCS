@@ -104,40 +104,20 @@ void secondAlgo(int arr[], int size) {
     displayArray(arr,size);
 
     for ( int i = 3 ; i < size ; i++) {
+
         
-        if ( arr[i] > firstmax) {
-            if ( secondmax < firstmax && secondmax < thirdmax)  {
-                secondmax = arr[i];
-            }
-            else if ( thirdmax < firstmax && thirdmax < secondmax){
-                thirdmax = arr[i];
-            }
-            else {
-                firstmax = arr[i];
-            }
+        if ( arr[i] > firstmax && firstmax < secondmax && firstmax < thirdmax) {
+            firstmax = arr[i];
+
         }
-        else if ( arr[i] > secondmax) {
-            if ( firstmax < secondmax && firstmax < thirdmax)  {
-                firstmax = arr[i];
-            }
-            else if ( thirdmax < firstmax && thirdmax < secondmax){
-                thirdmax = arr[i];
-            }
-            else {
-                secondmax = arr[i];
-            }
+        else if ( arr[i] > secondmax && secondmax < firstmax && secondmax < thirdmax) {
+            secondmax = arr[i];
+
         }
-        else if ( arr[i] > thirdmax){
-            if ( firstmax < secondmax && firstmax < thirdmax)  {
-                firstmax = arr[i];
-            }
-            else if ( secondmax < firstmax && secondmax < thirdmax){
-                secondmax = arr[i];
-            }
-            else {
-                thirdmax = arr[i];
-            }
+        else if ( arr[i] > thirdmax && thirdmax < firstmax && thirdmax < secondmax) {
+            thirdmax = arr[i];
         }
+        
         cout << " Operation: " << i <<endl;
         cout << "FirstMAX: " << firstmax << " SecondMax: " << secondmax << " ThirdMax: " << thirdmax << endl;
         
@@ -147,6 +127,23 @@ void secondAlgo(int arr[], int size) {
 
 }
 
+//Third algo where we use sorting before finding the third max
+
+void thirdAlgo(int arr[], int size) {
+    displayArray(arr,size);
+
+    cout << "\nPrinting sorted array" << endl;
+    insertionSort(arr ,size);
+
+    for (int i = 0 ; i < size ; i ++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    cout << "Third Max is: " << arr[2] << endl;
+    
+}
+
+// Second Algotrithm alternative
 void secondAlgoAlt(int arr[], int size) {
 
     int firstmax = arr[0];
@@ -194,25 +191,6 @@ void secondAlgoAlt(int arr[], int size) {
 
     cout << "Third Max is : " << thirdmax << endl;
 
-}
-
-//Third algo where we use sorting before finding the third max
-
-void thirdAlgo(int arr[], int size) {
-    cout << "Printing unsorted array" << endl;
-    for ( int i = 0 ; i < size; i ++) {
-        cout << arr[i] << " ";
-    }
-
-    cout << "\nPrinting sorted array" << endl;
-    insertionSort(arr ,size);
-
-    for (int i = 0 ; i < size ; i ++) {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-    cout << "Third Max is: " << arr[2] << endl;
-    
 }
 
 int main() {
