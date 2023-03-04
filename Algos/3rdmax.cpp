@@ -20,6 +20,20 @@ void insertionSort(int array[], int size) {
   }
 }
 
+// Function to Display Array
+
+void displayArray(int arr[], int size) {
+
+    cout << "Printing Array " << endl;
+
+    for (int i = 0; i < size ; i++) {
+        cout << arr[i] << " ";
+
+    }
+    cout << endl;
+
+}
+
 
 /* First Algo where we find the max of the first array and create a second array 
 where the previous max is deleted and then third array where 
@@ -28,10 +42,7 @@ the previous max again is deleted using recursion */
 void firstAlgo(int arr[], int size, int count = 1) {
     int max = arr[0];
 
-    for (int i = 0 ; i < size; i++) {
-       cout << arr[i] << " ";
-
-    }   
+    displayArray(arr,size);
 
     for (int i = 1 ; i < size ; i++) {
         if (arr[i] > max) {
@@ -90,13 +101,7 @@ void secondAlgo(int arr[], int size) {
     int secondmax = arr[1];
     int thirdmax = arr[2];
 
-    cout << "~Printing Array~ " << endl; 
-
-    for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
-
-    }
-    cout << endl;
+    displayArray(arr,size);
 
     for ( int i = 3 ; i < size ; i++) {
         
@@ -142,21 +147,13 @@ void secondAlgo(int arr[], int size) {
 
 }
 
-void secondAlgoAlt() {
-    cout << "Second Algorithm Alternative" << endl;
+void secondAlgoAlt(int arr[], int size) {
 
     int firstmax = arr[0];
     int secondmax = arr[1];
     int thirdmax = arr[2];
 
-    cout << "~Printing Array~ " << endl; 
-
-    for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
-
-    }
-
-    cout << endl;
+    displayArray( arr, size);
     for ( int i = 3 ; i < size ; i++) {
         if (firstmax > secondmax && firstmax > thirdmax) {
             if (secondmax < thirdmax) {
@@ -246,6 +243,12 @@ int main() {
     cout << "---------------" << endl;
     cout << "Third Algorithm - Using Sort Before Finding 3rd Max" << endl;
     thirdAlgo(arr3, size);
+    cout << "---------------" << endl;
+    cout << "---------------" << endl;
+    cout << "---------------" << endl;
+    cout << "2nd Algorithm Alternative";
+    secondAlgoAlt(arr2,size);
+
     
 
     return 0;
