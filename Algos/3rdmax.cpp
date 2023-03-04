@@ -84,13 +84,11 @@ and then loop through the remaining items in the array and replace the lowest of
 
 
 void secondAlgo(int arr[], int size) {
-    int firstmax, secondmax, thirdmax;
-
     cout << "Second Algorithm" << endl;
 
-    firstmax = arr[0];
-    secondmax = arr[1];
-    thirdmax = arr[2];
+    int firstmax = arr[0];
+    int secondmax = arr[1];
+    int thirdmax = arr[2];
 
     cout << "~Printing Array~ " << endl; 
 
@@ -100,48 +98,6 @@ void secondAlgo(int arr[], int size) {
     }
     cout << endl;
 
-/*
-    for ( int i = 3 ; i < size ; i++) {
-        if (firstmax > secondmax && firstmax > thirdmax) {
-            if (secondmax < thirdmax) {
-                thirdmax = thirdmax + secondmax;
-                secondmax = thirdmax - secondmax;
-                thirdmax = thirdmax - secondmax;
-        }
-        }
-        else if ( secondmax > firstmax && secondmax > thirdmax) {
-            secondmax = secondmax + firstmax;
-            firstmax = secondmax - firstmax;
-            secondmax = secondmax - firstmax;
-            if (secondmax < thirdmax) {
-                thirdmax = thirdmax + secondmax;
-                secondmax = thirdmax - secondmax;
-                thirdmax = thirdmax - secondmax;
-            }
-        }
-        else{
-            thirdmax = thirdmax + firstmax;
-            firstmax = thirdmax - firstmax;
-            thirdmax = thirdmax - firstmax;
-            if (secondmax < thirdmax) {
-                thirdmax = thirdmax + secondmax;
-                secondmax = thirdmax - secondmax;
-                thirdmax = thirdmax - secondmax;
-            }
-        }
-
-
-        if (arr[i] > thirdmax) {
-            thirdmax = arr[i];
-        }
-
-
-
-    }
-
-    cout << "Third Max is : " << thirdmax << endl;
-
-*/
     for ( int i = 3 ; i < size ; i++) {
         
         if ( arr[i] > firstmax) {
@@ -185,6 +141,64 @@ void secondAlgo(int arr[], int size) {
     cout << "Third Max is : " << lowest << endl;
 
 }
+
+void secondAlgoAlt() {
+    cout << "Second Algorithm Alternative" << endl;
+
+    int firstmax = arr[0];
+    int secondmax = arr[1];
+    int thirdmax = arr[2];
+
+    cout << "~Printing Array~ " << endl; 
+
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+
+    }
+
+    cout << endl;
+    for ( int i = 3 ; i < size ; i++) {
+        if (firstmax > secondmax && firstmax > thirdmax) {
+            if (secondmax < thirdmax) {
+                thirdmax = thirdmax + secondmax;
+                secondmax = thirdmax - secondmax;
+                thirdmax = thirdmax - secondmax;
+        }
+        }
+        else if ( secondmax > firstmax && secondmax > thirdmax) {
+            secondmax = secondmax + firstmax;
+            firstmax = secondmax - firstmax;
+            secondmax = secondmax - firstmax;
+            if (secondmax < thirdmax) {
+                thirdmax = thirdmax + secondmax;
+                secondmax = thirdmax - secondmax;
+                thirdmax = thirdmax - secondmax;
+            }
+        }
+        else{
+            thirdmax = thirdmax + firstmax;
+            firstmax = thirdmax - firstmax;
+            thirdmax = thirdmax - firstmax;
+            if (secondmax < thirdmax) {
+                thirdmax = thirdmax + secondmax;
+                secondmax = thirdmax - secondmax;
+                thirdmax = thirdmax - secondmax;
+            }
+        }
+
+
+        if (arr[i] > thirdmax) {
+            thirdmax = arr[i];
+        }
+
+
+
+    }
+
+    cout << "Third Max is : " << thirdmax << endl;
+
+}
+
 //Third algo where we use sorting before finding the third max
 
 void thirdAlgo(int arr[], int size) {
@@ -202,7 +216,6 @@ void thirdAlgo(int arr[], int size) {
     cout << endl;
     cout << "Third Max is: " << arr[2] << endl;
     
-
 }
 
 int main() {
