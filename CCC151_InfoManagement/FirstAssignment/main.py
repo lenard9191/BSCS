@@ -1,16 +1,25 @@
+import os
 def addStudent():
     with open("file.txt" , "a") as file:
         name = input("Enter Name: ")
-        id = input("Enter ID-NO: ")
+        while True:
+            id = input("Enter ID-NO (in format xxxx-xxxx): ")
+            if len(id) == 9 and id[4] == "-":
+                break
+            else:
+                print("Invalid ID-NO. Please enter in format xxxx-xxxx!")
         course = input("Enter Course: ")
         age = input("Enter Age: ")
-        file.write(f"{name},{id},{course},{age}\n")
+        file.write(f"{name} , {id} , {course} , {age} \n")
         print("Student added successfully.")
         
 
 def listStudent():
-    with open("file.txt" , "r" ) as file:
-        print(file.read())
+    if os.path.exists("file.txt"):
+        with open("file.txt" , "r" ) as file:
+            print(file.read())
+    else:
+        print("File not found/No Student yet")
 
 
 
