@@ -9,11 +9,14 @@ using namespace std;
 class hashTable{
     private:
         int buckets;
+        int probes;
         list<int> *table;
+
     public:
         hashTable(int b) {
             buckets = b;
             table = new list<int>[buckets];
+            probes = 0;
         }
         void insert(int key);
         void print();
@@ -34,6 +37,7 @@ void hashTable::linearProbeInsert(int key) {
     int index = key % buckets;
     while(!table[index].empty()){
         index = (index + 1) % buckets;
+        probes++;
     }
     table[index].push_back(key);
 }
@@ -45,6 +49,7 @@ void hashTable::quadraticProbeInsert(int key) {
     while(!table[index].empty()){
         index = (index + (i * i) ) % buckets;
         i++;
+        probes++;
     }
     table[index].push_back(key);
 }
@@ -59,6 +64,7 @@ void hashTable::doubleHashingInsert(int key) {
     while(!table[index].empty()){
         index = (index + i*second_hash) % buckets;
         i++;
+        probes++;
     }
     table[index].push_back(key);
 
@@ -72,6 +78,8 @@ void hashTable::print() {
         }
         cout << endl;
     }
+
+    cout << "Total Probes: " << probes << endl;
 }
 int main() {
     hashTable ht1(17);
