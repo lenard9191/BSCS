@@ -16,11 +16,11 @@ class hashTable{
             buckets = b;
             table = new list<int>[buckets];
         }
-        void insert(int d);
+        void insert(int key);
         void print();
-        void linearInsert(int d);
-        void quadInsert(int d);
-        void doubleHashing(int d);
+        void linearProbeInsert(int key);
+        void quadraticProbeInsert(int key);
+        void doubleHashingInsert(int key);
 };
 
 
@@ -29,17 +29,17 @@ void hashTable::insert(int key) {
     table[index].push_back(key);
     
 }
-void hashTable::linearInsert(int key) {
+void hashTable::linearProbeInsert(int key) {
     int index = key % buckets;
     while(!table[index].empty()){
         index = (index + 1) % buckets;
     }
     table[index].push_back(key);
 }
-void hashTable::quadInsert(int key) {
+void hashTable::quadraticProbeInsert(int key) {
     return ;
 }
-void hashTable::doubleHashing(int d ) {
+void hashTable::doubleHashingInsert(int d ) {
     return;
 }
 void hashTable::print() {
