@@ -74,16 +74,29 @@ void hashTable::print() {
     }
 }
 int main() {
-    hashTable ht(17);
+    hashTable ht1(17);
+    hashTable ht2(17);
+    hashTable ht3(17);
+    hashTable ht4(17);
     int arr[] = {25, 88, 3, 38, 20, 71, 55, 56, 50, 105};
     int size = sizeof(arr)/sizeof(arr[0]);
     
     for(int i = 0 ; i < size; i++) {
-        ht.doubleHashingInsert(arr[i]);
+        ht1.insert(arr[i]);
+        ht2.linearProbeInsert(arr[i]);
+        ht3.quadraticProbeInsert(arr[i]);
+        ht4.doubleHashingInsert(arr[i]);
     }
 
-    
-    ht.print();
+    cout << "Normal Hash \n" << endl;
+    ht1.print();
+
+    cout << "\nLinearProbe Hash \n" << endl;
+    ht2.print();
+    cout << "\nQuadraticProbe Hash \n"  << endl;
+    ht3.print();
+    cout << "\nDoubleHash \n" << endl;
+    ht4.print();
     
 
     return 0;
