@@ -1,4 +1,3 @@
-// Online C++ compiler to run C++ program online
 #include <iostream>
 #include <list>
 #include <assert.h>
@@ -29,6 +28,8 @@ void hashTable::insert(int key) {
     table[index].push_back(key);
     
 }
+
+// hx = (hashx + 0 ) % tablesize;
 void hashTable::linearProbeInsert(int key) {
     int index = key % buckets;
     while(!table[index].empty()){
@@ -36,18 +37,33 @@ void hashTable::linearProbeInsert(int key) {
     }
     table[index].push_back(key);
 }
+
+// hx = (hashx + i*i ) % tablesize;
 void hashTable::quadraticProbeInsert(int key) {
     int index = key % buckets;
     int i = 1;
     while(!table[index].empty()){
-        index = (index + (i*i) ) % buckets;
+        index = (index + (i * i) ) % buckets;
         i++;
     }
     table[index].push_back(key);
 }
-void hashTable::doubleHashingInsert(int d ) {
-    return;
+
+// hx = (hashx + 1*hash2ndx) % tablesize
+//primary hash function h(k) = k mod 17
+//secondary hash function d(k) = 13 - k mod 13
+void hashTable::doubleHashingInsert(int key) {
+    int index = key % buckets;
+    int i = 1;
+    int second_hash = 13 - key % 13;
+    while(!table[index].empty()){
+        index = (index + i*second_hash) % buckets;
+        i++;
+    }
+    table[index].push_back(key);
+
 }
+
 void hashTable::print() {
     for(int i = 0; i < buckets; i++) {
         cout<< "Index: " << i << "|";
@@ -63,7 +79,7 @@ int main() {
     int size = sizeof(arr)/sizeof(arr[0]);
     
     for(int i = 0 ; i < size; i++) {
-        ht.quadraticProbeInsert(arr[i]);
+        ht.doubleHashingInsert(arr[i]);
     }
 
     
