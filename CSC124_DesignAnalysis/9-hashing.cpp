@@ -37,7 +37,13 @@ void hashTable::linearProbeInsert(int key) {
     table[index].push_back(key);
 }
 void hashTable::quadraticProbeInsert(int key) {
-    return ;
+    int index = key % buckets;
+    int i = 1;
+    while(!table[index].empty()){
+        index = (index + (i*i) ) % buckets;
+        i++;
+    }
+    table[index].push_back(key);
 }
 void hashTable::doubleHashingInsert(int d ) {
     return;
@@ -57,7 +63,7 @@ int main() {
     int size = sizeof(arr)/sizeof(arr[0]);
     
     for(int i = 0 ; i < size; i++) {
-        ht.linearInsert(arr[i]);
+        ht.quadraticProbeInsert(arr[i]);
     }
 
     
