@@ -24,15 +24,19 @@ class hashTable{
 };
 
 
-void hashTable::insert(int d) {
-    int index = d % buckets;
-    table[index].push_back(d);
+void hashTable::insert(int key) {
+    int index = key % buckets;
+    table[index].push_back(key);
     
 }
-void hashTable::linearInsert(int d) {
-    return ;
+void hashTable::linearInsert(int key) {
+    int index = key % buckets;
+    while(!table[index].empty()){
+        index = (index + 1) % buckets;
+    }
+    table[index].push_back(key);
 }
-void hashTable::quadInsert(int d) {
+void hashTable::quadInsert(int key) {
     return ;
 }
 void hashTable::doubleHashing(int d ) {
@@ -53,7 +57,7 @@ int main() {
     int size = sizeof(arr)/sizeof(arr[0]);
     
     for(int i = 0 ; i < size; i++) {
-        ht.insert(arr[i]);
+        ht.linearInsert(arr[i]);
     }
 
     
