@@ -40,11 +40,14 @@ def deleteStudent():
             print("Student not found.")
 
 def searchStudent():
-    id = input("Enter the ID of the student to search: ")
+    search_input = input("Enter the ID or the NAME of the student to search: ")
     with open("file.txt", "r") as file:
         found = False
         for line in file:
-            if id in line.split(",")[1]:
+            info = line.split(",")
+            studentid = info[1].strip();
+            studentname = info[2].strip();
+            if search_input == studentid or search_input.lower() == studentname.lower():
                 print(line.strip())
                 found = True
                 break
