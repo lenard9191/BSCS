@@ -35,6 +35,7 @@ void hashTable::insert(int key) {
 // hx = (hashx + 0 ) % tablesize;
 void hashTable::linearProbeInsert(int key) {
     int index = key % buckets;
+    probes++;
     while(!table[index].empty()){
         index = (index + 1) % buckets;
         probes++;
@@ -45,9 +46,11 @@ void hashTable::linearProbeInsert(int key) {
 // hx = (hashx + i*i ) % tablesize;
 void hashTable::quadraticProbeInsert(int key) {
     int index = key % buckets;
+    probes++;
+    int orig = key % buckets;
     int i = 1;
     while(!table[index].empty()){
-        index = (index + (i * i) ) % buckets;
+        index = (orig + (i * i) ) % buckets;
         i++;
         probes++;
     }
@@ -59,10 +62,12 @@ void hashTable::quadraticProbeInsert(int key) {
 //secondary hash function d(k) = 13 - k mod 13
 void hashTable::doubleHashingInsert(int key) {
     int index = key % buckets;
+    probes++;
+    int orig = key % buckets;
     int i = 1;
     int second_hash = 13 - key % 13;
     while(!table[index].empty()){
-        index = (index + i*second_hash) % buckets;
+        index = (orig + i*second_hash) % buckets;
         i++;
         probes++;
     }
