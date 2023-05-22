@@ -115,7 +115,7 @@ void hashTable::print() {
     cout << "Total Probes: " << probes << endl;
 }
 int main() {
-    int max_size = 70000;
+    int max_size = 10000;
     hashTable ht1(max_size);
     hashTable ht2(max_size);
     hashTable ht3(max_size);
