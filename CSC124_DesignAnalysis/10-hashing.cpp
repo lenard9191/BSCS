@@ -115,7 +115,7 @@ void hashTable::print() {
     cout << "Total Probes: " << probes << endl;
 }
 int main() {
-    int max_size = 10000;
+    int max_size = 70000;
     hashTable ht1(max_size);
     hashTable ht2(max_size);
     hashTable ht3(max_size);
@@ -157,7 +157,7 @@ int main() {
     }
     finish3 = clock();
     double time_taken3 = (double(finish3 - start3) / double(CLOCKS_PER_SEC) )* 1000;
-    cout << "Time taken by quadraticProbeInsert is : " << fixed << time_taken3 << setprecision(5) << " millisec" << endl;
+    cout << "Time taken by doubleHashInsert is : " << fixed << time_taken3 << setprecision(5) << " millisec" << endl;
     cout << "SIZE: " << max_size << endl;
 
     // cout << "Normal Hash \n" << endl;
