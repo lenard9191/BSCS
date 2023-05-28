@@ -1,4 +1,30 @@
 import os
+
+def editStudent():
+    id_input = input("Enter the ID of the student to edit: ")
+    with open("file.txt", "r") as file:
+        lines = file.readlines()
+    with open("file.txt", "w") as file:
+        edited = False
+        for line in lines:
+            if id_input not in line.split(",")[1]:
+                file.write(line)
+            else:
+                edited = True
+                name = input("Enter Name: ")
+                while True:
+                    id = input("Enter ID-NO (in format xxxx-xxxx): ")
+                    if len(id) == 9 and id[4] == "-":
+                        break
+                    else:
+                        print("Invalid ID-NO. Please enter in format xxxx-xxxx!")
+                course = input("Enter Course: ")
+                age = input("Enter Age: ")
+                file.write(f"{name}, {id}, {course}, {age}\n")
+                print("Student edited successfully.")
+        if not edited:
+            print("Student not found.")
+            
 def addStudent():
     with open("file.txt" , "a") as file:
         name = input("Enter Name: ")
