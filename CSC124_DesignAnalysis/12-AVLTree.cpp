@@ -211,60 +211,61 @@ public:
 int main() {
     AVLTree avl;
 
-    int max_size = 10;
+    int max_size = 500000;
     int search_key, search_index;
     int delete_key, delete_index;
     srand(time(NULL));
 
-    search_index = rand() % max_size;
-    delete_index = rand() % max_size;
+    for(int j = 0; j < 5; j++){
+        search_index = rand() % max_size;
+        delete_index = rand() % max_size;
 
-    clock_t start1, finish1, start2, finish2, start3, finish3;
+        clock_t start1, finish1, start2, finish2, start3, finish3;
 
-    // Insert nodes
-    start1 = clock();
-    for (int i = 0; i < max_size; i++) {
-        int data = rand();
-        avl.insert(data);
-        if (i == search_index) {
-            search_key = data;
+        // Insert nodes
+        start1 = clock();
+        for (int i = 0; i < max_size; i++) {
+            int data = rand();
+            avl.insert(data);
+            if (i == search_index) {
+                search_key = data;
+            }
+            if (i == delete_index) {
+                delete_key = data;
+            }
         }
-        if (i == delete_index) {
-            delete_key = data;
-        }
+        finish1 = clock();
+
+        double time_taken1 = (double(finish1 - start1) / double(CLOCKS_PER_SEC)) * 1000;
+        cout << "Time taken by Inserting is: " << fixed << time_taken1 << setprecision(5) << " milliseconds" << endl;
+        cout << "Size: " << max_size << endl;
+
+        // Print AVL tree
+        // std::cout << "AVL Tree:" << std::endl;
+        // avl.inorder();
+
+        // Search for a key
+        start2 = clock();
+        if (avl.search(search_key))
+            std::cout << search_key << " is found in the AVL tree." << std::endl;
+        else
+            std::cout << search_key << " is not found in the AVL tree." << std::endl;
+        finish2 = clock();
+
+        double time_taken2 = (double(finish2 - start2) / double(CLOCKS_PER_SEC)) * 1000;
+        cout << "Time taken by Searching is: " << fixed << time_taken2 << setprecision(5) << " milliseconds" << endl;
+
+        // Delete a key
+        start3 = clock();
+        avl.remove(delete_key);
+        finish3 = clock();
+
+        double time_taken3 = (double(finish3 - start3) / double(CLOCKS_PER_SEC)) * 1000;
+        cout << "Time taken by Deleting is: " << fixed << time_taken3 << setprecision(5) << " milliseconds" << endl;
+
+        // Print AVL tree after deletion
+        // std::cout << "AVL Tree after deletion:" << std::endl;
+        // avl.inorder();
     }
-    finish1 = clock();
-
-    double time_taken1 = (double(finish1 - start1) / double(CLOCKS_PER_SEC)) * 1000;
-    cout << "Time taken by Inserting is: " << fixed << time_taken1 << setprecision(5) << " milliseconds" << endl;
-    cout << "Size: " << max_size << endl;
-
-    // Print AVL tree
-    // std::cout << "AVL Tree:" << std::endl;
-    // avl.inorder();
-
-    // Search for a key
-    start2 = clock();
-    if (avl.search(search_key))
-        std::cout << search_key << " is found in the AVL tree." << std::endl;
-    else
-        std::cout << search_key << " is not found in the AVL tree." << std::endl;
-    finish2 = clock();
-
-    double time_taken2 = (double(finish2 - start2) / double(CLOCKS_PER_SEC)) * 1000;
-    cout << "Time taken by Searching is: " << fixed << time_taken2 << setprecision(5) << " milliseconds" << endl;
-
-    // Delete a key
-    start3 = clock();
-    avl.remove(delete_key);
-    finish3 = clock();
-
-    double time_taken3 = (double(finish3 - start3) / double(CLOCKS_PER_SEC)) * 1000;
-    cout << "Time taken by Deleting is: " << fixed << time_taken3 << setprecision(5) << " milliseconds" << endl;
-
-    // Print AVL tree after deletion
-    // std::cout << "AVL Tree after deletion:" << std::endl;
-    // avl.inorder();
-
     return 0;
 }
