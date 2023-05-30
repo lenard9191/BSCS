@@ -1,6 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
+#include <bits/stdc++.h>
+#include <stdlib.h>
+
+
+using namespace std;
 
 class Node {
 public:
@@ -121,11 +126,17 @@ private:
 
     void inorderTraversal(Node* root) {
         if (root != nullptr) {
-            for (int i = 0; i < root->keys.size(); i++) {
-                inorderTraversal(root->children[i]);
-                std::cout << root->keys[i] << " ";
+            if (!root->isLeaf()) {
+                for (int i = 0; i < root->keys.size(); i++) {
+                    inorderTraversal(root->children[i]);
+                    std::cout << root->keys[i] << " ";
+                }
+                inorderTraversal(root->children[root->keys.size()]);
+            } else {
+                for (int i = 0; i < root->keys.size(); i++) {
+                    std::cout << root->keys[i] << " ";
+                }
             }
-            inorderTraversal(root->children[root->keys.size()]);
         }
     }
 
@@ -221,35 +232,71 @@ public:
 int main() {
     TwoFourTree tree;
 
+
+    int max_size = 100000;
+    int search_key, search_index;
+    int delete_key, delete_index;
+    srand(time(NULL));
+
+    search_index = rand() % max_size;
+    delete_index = rand() % max_size;
+
+    clock_t start1, finish1, start2, finish2, start3, finish3;
+
     // Insert nodes
-    tree.insert(50);
-    tree.insert(30);
-    tree.insert(20);
-    tree.insert(40);
-    tree.insert(70);
-    tree.insert(60);
-    tree.insert(80);
+
+    start1 = clock();
+
+    for(int i = 0; i < max_size; i++){
+        int data = rand();
+        tree.insert(data);
+        if (i == search_index) {
+            search_key = data;
+        }
+        if (i == delete_index) {
+            delete_key = data;
+        }
+
+    }
+
+    finish1 = clock();
+    
+    double time_taken1 = (double(finish1 - start1) / double(CLOCKS_PER_SEC)) * 1000;
+    cout << "Time taken by Inserting is: " << fixed << time_taken1 << setprecision(5) << " milliseconds" << endl;
+    cout << "Size: " << max_size << endl;
 
     // Inorder traversal
-    std::cout << "Inorder traversal: ";
-    tree.inorder();
-    std::cout << std::endl;
+    // std::cout << "Inorder traversal: ";
+    // tree.inorder();
+    // std::cout << std::endl;
 
     // Search for a key
-    int key = 40;
-    if (tree.search(key))
-        std::cout << key << " is found in the 2-4 tree." << std::endl;
+    start2 = clock();
+
+    if (tree.search(search_key))
+        std::cout << search_key << " is found in the 2-4 tree." << std::endl;
     else
-        std::cout << key << " is not found in the 2-4 tree." << std::endl;
+        std::cout << search_key << " is not found in the 2-4 tree." << std::endl;
+
+    finish2 = clock();
+
+    double time_taken2 = (double(finish2 - start2) / double(CLOCKS_PER_SEC)) * 1000;
+    cout << "Time taken by Searching is: " << fixed << time_taken2 << setprecision(5) << " milliseconds" << endl;
 
     // Delete a key
-    key = 30;
-    tree.remove(key);
+    start3 = clock();
+
+    tree.remove(delete_key);
+
+    finish3 = clock();
+
+    double time_taken3 = (double(finish3 - start3) / double(CLOCKS_PER_SEC)) * 1000;
+    cout << "Time taken by Deleting is: " << fixed << time_taken3 << setprecision(5) << " milliseconds" << endl;
 
     // Inorder traversal after deletion
-    std::cout << "Inorder traversal after deletion: ";
-    tree.inorder();
-    std::cout << std::endl;
+    // std::cout << "Inorder traversal after deletion: ";
+    // tree.inorder();
+    // std::cout << std::endl;
 
     return 0;
 }
