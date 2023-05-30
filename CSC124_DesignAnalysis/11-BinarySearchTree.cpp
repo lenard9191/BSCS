@@ -1,5 +1,9 @@
 #include <iostream>
+#include <stdlib.h>
 #include <time.h>
+#include <bits/stdc++.h>
+
+using namespace std;
 
 class Node {
 public:
@@ -21,12 +25,12 @@ private:
     Node* insertNode(Node* root, int key) {
         if (root == nullptr)
             return new Node(key);
-        
+
         if (key < root->key)
             root->left = insertNode(root->left, key);
         else if (key > root->key)
             root->right = insertNode(root->right, key);
-        
+
         return root;
     }
 
@@ -54,14 +58,14 @@ private:
     Node* findMinNode(Node* root) {
         while (root->left != nullptr)
             root = root->left;
-        
+
         return root;
     }
 
     Node* deleteNode(Node* root, int key) {
         if (root == nullptr)
             return root;
-        
+
         if (key < root->key)
             root->left = deleteNode(root->left, key);
         else if (key > root->key)
@@ -112,35 +116,61 @@ public:
 int main() {
     BinarySearchTree bst;
 
-    // Insert nodes
-    bst.insert(50);
-    bst.insert(30);
-    bst.insert(20);
-    bst.insert(40);
-    bst.insert(70);
-    bst.insert(60);
-    bst.insert(80);
+    int max_size = 10000000;
+    int search_key, search_index;
+    int delete_key, delete_index;
+    srand(time(NULL));
+
+    search_index = rand() % max_size;
+    delete_index = rand() % max_size;
+
+    clock_t start1, finish1, start2, finish2, start3, finish3;
+
+    start1 = clock();
+    for (int i = 0; i < max_size; i++) {
+        int data = rand();
+        bst.insert(data);
+        if (i == search_index) {
+            search_key = data;
+        }
+        if (i == delete_index) {
+            delete_key = data;
+        }
+    }
+    finish1 = clock();
+
+    double time_taken1 = (double(finish1 - start1) / double(CLOCKS_PER_SEC)) * 1000;
+    cout << "Time taken by Inserting is: " << fixed << time_taken1 << setprecision(5) << " milliseconds" << endl;
+    cout << "Size: " << max_size << endl;
 
     // Inorder traversal
-    std::cout << "Inorder traversal: ";
-    bst.inorder();
-    std::cout << std::endl;
+    // std::cout << "Inorder traversal: ";
+    // bst.inorder();
+    // std::cout << std::endl;
 
     // Search for a key
-    int key = 40;
-    if (bst.search(key))
-        std::cout << key << " is found in the BST." << std::endl;
+    start2 = clock();
+    if (bst.search(search_key))
+        std::cout << search_key << " is found in the BST." << std::endl;
     else
-        std::cout << key << " is not found in the BST." << std::endl;
+        std::cout << search_key << " is not found in the BST." << std::endl;
+    finish2 = clock();
+
+    double time_taken2 = (double(finish2 - start2) / double(CLOCKS_PER_SEC)) * 1000;
+    cout << "Time taken by Search is: " << fixed << time_taken2 << setprecision(5) << " milliseconds" << endl;
 
     // Delete a key
-    key = 30;
-    bst.remove(key);
+    start3 = clock();
+    bst.remove(delete_key);
+    finish3 = clock();
+
+    double time_taken3 = (double(finish3 - start3) / double(CLOCKS_PER_SEC)) * 1000;
+    cout << "Time taken by Delete is: " << fixed << time_taken3 << setprecision(5) << " milliseconds" << endl;
 
     // Inorder traversal after deletion
-    std::cout << "Inorder traversal after deletion: ";
-    bst.inorder();
-    std::cout << std::endl;
+    // std::cout << "Inorder traversal after deletion: ";
+    // bst.inorder();
+    // std::cout << std::endl;
 
     return 0;
 }
