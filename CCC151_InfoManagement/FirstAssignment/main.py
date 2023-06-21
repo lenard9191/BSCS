@@ -28,6 +28,12 @@ def addStudent():
     with open("file.txt" , "a") as file:
         name = input("Enter Name: ")
         id = input("Enter ID-NO: ")
+        with open("file.txt", "r") as file:
+            lines = file.readlines()
+            for line in lines:
+                if id in line.split(",")[1]:
+                    print("ID already taken. Please choose a different ID.")
+                    return
         course = input("Enter CourseCode: ")
         createCourse(course)
         age = input("Enter Age: ")
@@ -119,9 +125,9 @@ def editCourse():
                     course_name = input("Enter New CourseName: ")
                     
                     file.write(f"{course_code},{course_name}\n")
-                    print("Student edited successfully.")
+                    print("Course edited successfully.")
             if not edited:
-                print("Student not found.")
+                print("Course Not Found not found.")
     else:
         print("No Course File Yet")
 
