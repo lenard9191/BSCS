@@ -7,7 +7,7 @@ def editStudent():
             lines = file.readlines()
         with open("file.txt", "w") as file:
             edited = False
-            for line in lines:``
+            for line in lines:
                 if id_input not in line.split(",")[1]:
                     file.write(line)
                 else:
@@ -50,17 +50,22 @@ def deleteStudent():
         id = input("Enter the ID of the student to delete: ")
         with open("file.txt", "r") as file:
             lines = file.readlines()
-        with open("file.txt", "w") as file:
-            deleted = False
-            for line in lines:
-                if id not in line.split(",")[1]:
-                    file.write(line)
-                else:
+        
+        deleted = False
+        for line in lines:
+            if id in line.split(",")[1]:
+                confirm = input("Are you sure you want to delete this student? (y/n): ")
+                if confirm.lower() == "y":
+                    lines.remove(line)
                     deleted = True
-            if deleted:
-                print("Student deleted successfully.")
-            else:
-                print("Student not found.")
+                break
+        
+        if deleted:
+            with open("file.txt", "w") as file:
+                file.writelines(lines)
+            print("Student deleted successfully.")
+        else:
+            print("Student not found.")
     else:
         print("No File Yet")
 
@@ -90,19 +95,25 @@ def deleteCourse():
         course_code = input("Enter the CourseCode to Delete: ")
         with open("course.txt", "r") as file:
             lines = file.readlines()
-        with open("course.txt", "w") as file:
-            deleted = False
-            for line in lines:
-                if course_code not in line.split(",")[0]:
-                    file.write(line)
-                else:
+        
+        deleted = False
+        for line in lines:
+            if course_code in line.split(",")[0]:
+                confirm = input("Are you sure you want to delete this course? (y/n): ")
+                if confirm.lower() == "y":
+                    lines.remove(line)
                     deleted = True
-            if deleted:
-                print("CourseCode Deleted :")
-            else:
-                print("Course not FOund")
+                break
+        
+        if deleted:
+            with open("course.txt", "w") as file:
+                file.writelines(lines)
+            print("Course deleted successfully.")
+        else:
+            print("Course not found.")
     else:
         print("No Course File Yet")
+
                 
 
 
