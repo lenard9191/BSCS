@@ -7,7 +7,7 @@ def editStudent():
             lines = file.readlines()
         with open("file.txt", "w") as file:
             edited = False
-            for line in lines:
+            for line in lines:``
                 if id_input not in line.split(",")[1]:
                     file.write(line)
                 else:
@@ -64,6 +64,8 @@ def deleteStudent():
     else:
         print("No File Yet")
 
+
+
 def createCourse(course):
     if not os.path.exists("course.txt"):
         with open("course.txt", "w") as course_file:
@@ -103,28 +105,28 @@ def deleteCourse():
         print("No Course File Yet")
                 
 
+
 def editCourse():
     if os.path.exists("course.txt"):
-        course_code = input("Enter the CourseCode to Edit: ")
+        course_input = input("Enter the CourseCode to edit: ")
         with open("course.txt", "r") as file:
             lines = file.readlines()
         with open("course.txt", "w") as file:
             edited = False
             for line in lines:
-                if course_code not in line.split(",")[1]:
+                if course_input not in line.split(",")[0]:
                     file.write(line)
                 else:
                     edited = True
-                    course_code = input("Enter New Name: ")
-                    
-                    course_name = input("Enter New CourseName: ")
-                    
-                    file.write(f"{course_code},{course_name}\n")
+                    course_code_new = input("Enter New CourseCode: ")
+                    course_name_new = input("Enter new CourseName: ")
+                    file.write(f"{course_code_new}, {course_name_new}\n")
                     print("Course edited successfully.")
             if not edited:
-                print("Course Not Found not found.")
+                print("Course not found.")
     else:
         print("No Course File Yet")
+
 
 def listCourse():
     if os.path.exists("course.txt"):
