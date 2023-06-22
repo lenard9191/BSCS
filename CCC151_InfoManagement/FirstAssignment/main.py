@@ -14,40 +14,35 @@ def editStudent():
                     edited = True
                     name = input("Enter New Name: ")
                     id = input("Enter New ID-NO: ")
+                    gender = input("Enter New Gender: ")
                     course = input("Enter New CourseCode: ")
                     createCourse(course)
                     age = input("Enter New Age: ")
-                    file.write(f"{name}, {id}, {course}, {age}\n")
+                    file.write(f"{name}, {id}, {gender}, {course}, {age}\n")
                     print("Student edited successfully.")
             if not edited:
                 print("Student not found.")
     else:
         print("No Student File Yet")
-            
+
 def addStudent():
-    with open("file.txt" , "a") as file:
-        name = input("Enter Name: ")
-        id = input("Enter ID-NO: ")
-        with open("file.txt", "r") as file:
-            lines = file.readlines()
-            for line in lines:
-                if id in line.split(",")[1]:
-                    print("ID already taken. Please choose a different ID.")
-                    return
-        course = input("Enter CourseCode: ")
-        createCourse(course)
-        age = input("Enter Age: ")
-        file.write(f"{name} , {id} , {course} , {age} \n")
+    name = input("Enter Name: ")
+    id = input("Enter ID-NO: ")
+    gender = input("Enter Gender: ")
+    course = input("Enter CourseCode: ")
+    createCourse(course)
+    age = input("Enter Age: ")
+    
+    with open("file.txt", "a") as file:
+        file.write(f"{name}, {id}, {gender}, {course}, {age}\n")
         print("Student added successfully.")
-        
 
 def listStudent():
     if os.path.exists("file.txt"):
-        with open("file.txt" , "r" ) as file:
+        with open("file.txt", "r") as file:
             print(file.read())
     else:
         print("File not found/No Student yet")
-
 
 
 def deleteStudent():
@@ -67,7 +62,7 @@ def deleteStudent():
             else:
                 print("Student not found.")
     else:
-        print("No FIle Yet")
+        print("No File Yet")
 
 def createCourse(course):
     if not os.path.exists("course.txt"):
