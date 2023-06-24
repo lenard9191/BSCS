@@ -177,26 +177,6 @@ def checkCourseExists(course_code):
                     return True
     return False
 
-def searchStudent():
-    if os.path.exists("file.txt"):
-        search_input = input("Enter the ID or the NAME of the student to search: ")
-        with open("file.txt", "r") as file:
-            found = False
-            for line in file:
-                info = line.split(",")
-                studentid = info[1].strip();
-                studentname = info[2].strip();
-                if search_input == studentid or search_input.lower() == studentname.lower():
-                    print(line.strip())
-                    found = True
-                    break
-            if not found:
-                print("Student not found.")
-    else:
-        print("No Studnt File Yet")
-
-
-
 def editStudent():
     if os.path.exists("file.txt"):
         student_id = input("Enter the STUDENT ID to edit: ")
