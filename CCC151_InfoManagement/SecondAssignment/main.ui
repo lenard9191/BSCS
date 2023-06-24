@@ -61,6 +61,11 @@ QLineEdit::placeholder {
 QLabel {
   color: #464d55;
   font-weight: 600;
+}
+
+QMessageBox{
+	border-radius: 10px;
+	
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -367,7 +372,8 @@ border: 1px solid black;
        <item>
         <widget class="QPushButton" name="studentStudent">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(98, 122, 255);</string>
+          <string notr="true">
+background-color: rgb(255, 170, 255);</string>
          </property>
          <property name="text">
           <string>Student</string>
@@ -455,6 +461,22 @@ border: 1px solid black;
       </property>
       <property name="text">
        <string>Update Student</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="studentCancel">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>180</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
       </property>
      </widget>
     </widget>
@@ -610,7 +632,8 @@ border: 1px solid black;
        <item>
         <widget class="QPushButton" name="coursesCourses">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(98, 122, 255);</string>
+          <string notr="true">
+background-color: rgb(255, 170, 255);</string>
          </property>
          <property name="text">
           <string>Courses</string>
@@ -686,6 +709,22 @@ border: 1px solid black;
       </property>
       <property name="text">
        <string>Update Course</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="courseCancel">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>160</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
       </property>
      </widget>
     </widget>

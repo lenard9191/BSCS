@@ -2,6 +2,7 @@ import sqlite3
 import sys
 
 from PyQt5.QtWidgets import *
+
 from PyQt5.uic import loadUiType
 
 ui, _ = loadUiType('main.ui')
@@ -23,6 +24,8 @@ class MainApp(QMainWindow, ui):
         self.studentTable.itemSelectionChanged.connect(self.enableStudentDeleteButton)
         self.courseTable.itemSelectionChanged.connect(self.enableCourseDeleteButton)
 
+        self.studentCancel.hide()
+        self.courseCancel.hide()
         self.studentUpdate.hide()
         self.courseUpdate.hide()
 
@@ -42,8 +45,25 @@ class MainApp(QMainWindow, ui):
         self.courseUpdate.clicked.connect(self.updateCourse)
         self.studentUpdate.clicked.connect(self.updateStudent)
 
+        self.studentCancel.clicked.connect(self.studentCancelButton)
+        self.courseCancel.clicked.connect(self.courseCancelButton)
 
 
+    def studentCancelButton(self):
+        self.clearStudentField()
+        self.showStudentTab()
+        self.studentUpdate.hide()
+        self.studentAdd.show()
+        self.studentEdit.show()
+        self.studentCancel.hide()
+
+    def courseCancelButton(self):
+        self.clearCourseField()
+        self.showCourseTab()
+        self.courseUpdate.hide()
+        self.courseAdd.show()
+        self.courseEdit.show()
+        self.courseCancel.hide()
     def showCourseTab(self):
         self.updateCourseDisplay()
         self.tabWidget.setCurrentIndex(1)
@@ -188,7 +208,9 @@ class MainApp(QMainWindow, ui):
         self.courseDelete.setEnabled(enable)
     def populateStudentFields(self):
         try:
+            self.studentEdit.hide()
             self.studentAdd.hide()
+            self.studentCancel.show()
             selected_rows = self.studentTable.selectedItems()
             if len(selected_rows) == 0:
                 return
@@ -213,7 +235,9 @@ class MainApp(QMainWindow, ui):
 
     def populateCourseFields(self):
         try:
+            self.courseEdit.hide()
             self.courseAdd.hide()
+            self.courseCancel.show()
             selected_rows = self.courseTable.selectedItems()
             if len(selected_rows) == 0:
                 return
